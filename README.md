@@ -16,3 +16,28 @@ ReverseProxy in golang
 
 	Listening on 0.0.0.0:8081, forwarding to https://www.baidu.com
 
+## use by docker
+
+docker pull ilanyu/golang-reverseproxy
+
+docker run -d -p 8888:8888 ilanyu/golang-reverseproxy
+
+docker run -d -p 9999:8888 -e "r=http://blog.lanyus.com" -e "l=0.0.0.0:8888" ilanyu/golang-reverseproxy
+
+## Dockerfile:
+
+FROM alpine:latest
+
+MAINTAINER ilanyu <lanyu19950316@gmail.com>
+
+ENV l 0.0.0.0:8888
+
+ENV r http://idea.lanyus.com:80
+
+COPY ReverseProxy_linux_amd64 /usr/bin/ReverseProxy_linux_amd64
+
+RUN chmod a+x /usr/bin/ReverseProxy_linux_amd64
+
+EXPOSE 8888
+
+CMD ["sh", "-c", "/usr/bin/ReverseProxy_linux_amd64 -l $l -r $r"]
