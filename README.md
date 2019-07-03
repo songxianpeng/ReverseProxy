@@ -24,6 +24,8 @@ docker run -d -p 8888:8888 ilanyu/golang-reverseproxy
 
 docker run -d -p 9999:8888 -e "r=http://blog.lanyus.com" -e "l=0.0.0.0:8888" ilanyu/golang-reverseproxy
 
+http://localhost:8888/88414687-3b91-4286-89ba-2dc813b107ce
+
 ## Dockerfile:
 
 FROM alpine:latest
@@ -41,3 +43,5 @@ RUN chmod a+x /usr/bin/ReverseProxy_linux_amd64
 EXPOSE 8888
 
 CMD ["sh", "-c", "/usr/bin/ReverseProxy_linux_amd64 -l $l -r $r"]
+
+
